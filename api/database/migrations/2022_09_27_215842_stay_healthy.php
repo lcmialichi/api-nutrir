@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create("user", function(Blueprint $table){
             $table->increments('id');
+            $table->string('email');
+            $table->string('senha');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('user');
     }
 };

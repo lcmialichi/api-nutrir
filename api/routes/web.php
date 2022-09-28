@@ -14,7 +14,7 @@
 */
 
 $router->group(["prefix" => "user"], function ($router) {
-    
-    $router->get("/", "AuthenticationController@make");
+
+    $router->post("/", "AuthenticationController@make");
 
 });

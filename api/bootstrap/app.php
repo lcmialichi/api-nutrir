@@ -23,6 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
+$app->middleware([
+    App\Http\Middleware\Authenticate::class
+]);
 // $app->withFacades();
 
 $app->withEloquent();
