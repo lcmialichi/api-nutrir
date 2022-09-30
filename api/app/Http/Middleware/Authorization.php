@@ -12,7 +12,6 @@ use Throwable;
 
 class Authorization
 {
-
     public function __construct(private Route $route)
     {
     }
@@ -33,7 +32,7 @@ class Authorization
             $bearer = str_replace("Bearer ", "", $authorization);
             if ($bearer) {
                 try {
-            
+
                     $jwt = JWT::decode($bearer, new Key(getenv("JWTKEY"), "HS256"));
 
                 } catch (Throwable) {

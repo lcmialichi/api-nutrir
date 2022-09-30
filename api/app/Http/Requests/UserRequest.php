@@ -11,11 +11,19 @@ class UserRequest extends FormRequest
 {
     private string $controller;
 
+    private $rules = [
+        AuthenticateController::class => [
+            "password" => "required",
+            "email" => "required|email"
+        ]
+    ];
+
     public function __construct(Request $request)
     {
-
         $this->controller = $request->route()->controller::class;
+
     }
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,18 +41,7 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return match ($this->controller) {
-            AuthenticateController::class => $this->authRule(),
-            default => []
-        };
-    }
-
-    public function authRule()
-    {
-        return [
-            "password" => "required",
-            "email" => "required|email"
-        ];
+        return $this->rules[$this->controller] ?? [];
     }
 
     public function messages()

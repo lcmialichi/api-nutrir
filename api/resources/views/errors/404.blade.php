@@ -4,7 +4,7 @@ header("Content-Type: application/json");
 echo json_encode(
     [
         "stauts" => false,
-        "message" => "rota nao encontrada",
+        "message" => "rota nao encontrada!",
         "data" => [
             "errorType" => App\Enum\Http::tryFrom(404)->name
         ]
