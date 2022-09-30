@@ -2,16 +2,20 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Laravel\Lumen\Http\Request;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class Authenticate
+class Authenticate extends Middleware
 {
-    public function handle(Request $request, Closure $next)
-    {   
-        
-        $action = $next($request);
-        echo "MiddleWare Rodando\n";
-        return $action;
+    /**
+     * Get the path the user should be redirected to when they are not authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
+     */
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
+        }
     }
 }
