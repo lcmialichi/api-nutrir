@@ -2,13 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\ControllerException;
+use App\Models\User;
+use Firebase\JWT\JWT;
 use App\Http\Requests\UserRequest;
-use Illuminate\Http\Request;
 
 class AuthenticateController extends Controller
 {
-    public function auth(UserRequest $request){
+    public function __construct(){}
 
-        return response()->json($request->all(), 200);
+    public function auth(UserRequest $request)
+    {
+
+        $inputs = $request->all();
+        $user = User::where("email", $inputs["email"] )->first()->toAlias(true);
+    
+        if($user->senha != $inputs["password"]){
+            throw new ControllerException("Usuario ou senha Invalidos!", 401);
+
+        }
+
+        $jwt = JWT::encode(["id" => $user->id, "date" =>time() ], getenv("JWTKEY"), 'HS256');
+
+        return response()->json([
+            "status" => true,
+            "message" => "Usuario autenticado com sucesso!",
+            "data" => [
+                "jwt" => $jwt,
+                "expireIn" => time() + 3600
+            ]
+        ], 200);
     }
 }
