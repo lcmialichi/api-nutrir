@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-class ValidationException extends \Exception
-{
+class ControllerException extends \Exception {
     use ExceptionTrait;
 }
