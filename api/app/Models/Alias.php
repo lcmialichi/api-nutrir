@@ -21,6 +21,6 @@ trait Alias
             }
         }
 
-        return false;
+        return $this->toArray();
     }
 }
