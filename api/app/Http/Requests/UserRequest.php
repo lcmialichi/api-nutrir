@@ -26,16 +26,16 @@ class UserRequest extends FormRequest
     {
         return [
             "password" => "required",
-            // "email" => "required|email"
+            "email" => "required|email"
         ];
     }
 
-    public function messages(){
-        return [
-            "email" => "email invalido!",
-            "password.required" => "campo 'password' é obrigatorio"
-        ];
-    }
+    // public function messages(){
+    //     return [
+    //         "email" => "email invalido!",
+    //         "password.required" => "campo 'password' é obrigatorio"
+    //     ];
+    // }
 
     public function failedValidation($errors)
     {
