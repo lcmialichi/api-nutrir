@@ -2,28 +2,15 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Cpf;
 use Illuminate\Http\Request;
 use App\Exceptions\ValidationException;
-use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Controllers\AuthenticateController;
 
 class UserRequest extends FormRequest
 {
-    private string $controller;
-
-    private $rules = [
-        AuthenticateController::class => [
-            "password" => "required",
-            "email" => "required|email"
-        ]
-    ];
-
-    public function __construct(Request $request)
-    {
-        $this->controller = $request->route()->controller::class;
-
-    }
-    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -41,7 +28,16 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        return $this->rules[$this->controller] ?? [];
+        return  [
+            "dadosPessoais" => "required|array",
+            "daodPessoais.nome" => "string|max:70",
+            "*daodPessoais.cpf" => [
+                "required", "numeric", "digits:11",
+            ],
+            "dadosContato" => "array",
+            "dadosContato.ddd" => "required_unless:dadosContato,null|numeric|digits:2",
+            "dadosContato.telefone" => "required_unless:dadosContato,null|numeric|digits:9"
+        ];
     }
 
     public function messages()

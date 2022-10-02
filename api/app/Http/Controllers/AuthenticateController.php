@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ControllerException;
 use App\Models\User;
 use Firebase\JWT\JWT;
+use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Exceptions\ControllerException;
 
 class AuthenticateController extends Controller
 {
     public function __construct(){}
 
-    public function auth(UserRequest $request)
+    public function auth(Request $request)
     {
+        $this->validate($request,  [
+            "senha" => "required",
+            "email" => "required|email"
+        ]);
 
         $inputs = $request->all();
         $user = User::where("email", $inputs["email"] )->first()->toAlias(true);
-        if($user->senha != $inputs["password"]){
+        if($user->senha != $inputs["senha"]){
             throw new ControllerException("Usuario ou senha Invalidos!", 401);
 
         }

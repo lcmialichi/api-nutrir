@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Rules\Cpf;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -11,7 +12,10 @@ class UserController extends Controller
         $this->middleware(\App\Http\MiddleWare\Authorization::class);
     }
     
-    public function register (Request $requet) {
-        echo "roudou";
+    public function register (UserRequest $request) { 
+        
+        $this->validate($request, ["*.cpf" => new Cpf]);
+
+       dd($request->input("dadosPessoais.cpf"));
     }
 }
