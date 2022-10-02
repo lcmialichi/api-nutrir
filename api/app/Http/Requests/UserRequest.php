@@ -42,8 +42,17 @@ class UserRequest extends FormRequest
 
     public function messages()
     {
-        return [];
+        return [
+            "dadosContato.ddd.required_unless" => ""
+        ];
         // troca as mensagens de retorno aqui
+    }
+
+    public function attributer()
+    {
+        return [
+
+        ];
     }
 
     public function failedValidation($errors)
