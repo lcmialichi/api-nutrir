@@ -18,8 +18,10 @@ class Cpf implements InvokableRule
 
     public function __invoke($attribute, $value, $fail)
     {
+// echo "invocado";
         if(!$this->cpfValidator($value)){
-             throw new ValidationException(sprintf("O campo %s é invalido!", $attribute), 422);
+            //  throw new ValidationException(sprintf("O campo %s é invalido!", $attribute), 422);
+            $fail("o :attribute deve ser valido");
         }
     }
 

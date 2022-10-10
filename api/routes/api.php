@@ -23,10 +23,12 @@ use \App\Http\MiddleWare\Authorization;
 // });
 
 
-Route::prefix("user")->group(function(){
+Route::prefix("user")->group(function () {
     Route::post("authenticate", [AuthenticateController::class, "auth"]);
 });
 
-Route::prefix("user")->middleware(Authorization::class)->group(function(){
-    Route::post("/", [UserController::class, "register"]);
-});
+Route::prefix("user")
+    // ->middleware(Authorization::class)
+    ->group(function () {
+        Route::post("/", [UserController::class, "register"]);
+    });

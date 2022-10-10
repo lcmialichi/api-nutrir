@@ -13,9 +13,10 @@ class UserController extends Controller
     }
     
     public function register (UserRequest $request) { 
-        
-        $this->validate($request, ["*.cpf" => new Cpf]);
-
-       dd($request->input("dadosPessoais.cpf"));
+  
+        return response()->json([
+            "status" => true,
+            "message" => "passou em todas as validaçoes"
+        ]);
     }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\AuthenticateController;
 
 class UserRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,21 +31,25 @@ class UserRequest extends FormRequest
     {
         return  [
             "dadosPessoais" => "required|array",
-            "daodPessoais.nome" => "string|max:70",
-            "*daodPessoais.cpf" => [
-                "required", "numeric", "digits:11",
+            "dadosPessoais.nome" => "string|max:70",
+            "*dadosPessoais.cpf" => [
+                "required", "numeric", "digits:11", new Cpf
             ],
             "dadosContato" => "array",
             "dadosContato.ddd" => "required_unless:dadosContato,null|numeric|digits:2",
-            "dadosContato.telefone" => "required_unless:dadosContato,null|numeric|digits:9"
+            "dadosContato.telefone" => "required_unless:dadosContato,null|numeric|digits:9",
+            "dadosEndereco" => "array",
+            "dadosEndereco.rua" => "required_unless:dadosEndereco,null|string|max:140",
+            "dadosEndereco.bairro" => "required_unless:dadosEndereco,null|string|max:70:",
+            "dadosEndereco.estado" => "required_unless:dadosEndereco,null|string|max:2",
+            "dadosEndereco.cidade" => "required_unless:dadosEndereco,null|string|max:50",
+            "dadosEndereco.pais" => "required_unless:dadosEndereco,null|string|max:50",
         ];
     }
 
     public function messages()
     {
-        return [
-            "dadosContato.ddd.required_unless" => ""
-        ];
+       return [];
         // troca as mensagens de retorno aqui
     }
 

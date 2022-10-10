@@ -7,14 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    use HasFactory, Alias;
+    use HasFactory;
 
-    protected $table = "user";
-    protected $primaryKey = "id";
-    protected $hidden = [];
-    protected $alias = [
-        "created_at" => "dataCriacao",
-        "updated_at" => "dataAtualizacao"
-    ];
-   
+    protected $table = "usuario";
+
 }
