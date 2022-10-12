@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\UserRequest;
 use App\Models\UserAddess;
 use App\Models\UserContact;
+use App\Http\Requests\UserRequest;
+use App\Exceptions\ControllerException;
 
 class UserController extends Controller
 {
@@ -21,6 +22,10 @@ class UserController extends Controller
         $user->load(
             ["userContact", "userAddress"]
         );
+
+        if ($user->firstWhere("cpf", $request->dadosPessoais["cpf"])) {
+            throw new ControllerException("Usuario ja cadastrado!", 400);
+        }   
 
         $user->fill($request->dadosPessoais);
         $user->save();
