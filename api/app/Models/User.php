@@ -11,7 +11,21 @@ class User extends Model
 
     protected $table = "usuario";
     
+    protected $fillable = [
+        "nome", "cpf", "nascimento"
+    ];
+
     public function userAccess(){
         return $this->hasMany(UserAccess::class, "usuario_id");
     }
+
+    public function userContact(){
+        return $this->hasOne(UserContact::class, "usuario_id");
+    }
+
+    public function userAddress(){
+        return $this->hasOne(UserAddess::class, "usuario_id");
+    }
+
+    
 }

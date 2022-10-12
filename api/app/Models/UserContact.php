@@ -10,6 +10,10 @@ class UserContact extends Model
     use HasFactory;
 
     protected $table = "usuario_contato";
+      
+    protected $fillable = [
+        "ddd", "telefone", "email"
+    ];
 
     public function use(){
         return $this->belongsTo(User::class);

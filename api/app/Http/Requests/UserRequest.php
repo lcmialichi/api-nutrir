@@ -43,8 +43,7 @@ class UserRequest extends FormRequest
             "dadosEndereco.rua" => "required_unless:dadosEndereco,null|string|max:140",
             "dadosEndereco.bairro" => "required_unless:dadosEndereco,null|string|max:70:",
             "dadosEndereco.estado" => "required_unless:dadosEndereco,null|string|max:2",
-            "dadosEndereco.cidade" => "required_unless:dadosEndereco,null|string|max:50",
-            "dadosEndereco.pais" => "required_unless:dadosEndereco,null|string|max:50",
+            "dadosEndereco.cidade" => "required_unless:dadosEndereco,null|string|max:50"
         ];
     }
 

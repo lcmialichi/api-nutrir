@@ -39,7 +39,6 @@ class Authorization
                     throw new HttpException("Token de autenticação invalido!", 422);
 
                 }
-
                 if($jwt->expire > time()){
                     return $next($request);
                 }
