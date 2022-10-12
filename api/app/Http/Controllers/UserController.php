@@ -24,7 +24,7 @@ class UserController extends Controller
         );
 
         if ($user->firstWhere("cpf", $request->dadosPessoais["cpf"])) {
-            throw new ControllerException("Usuario ja cadastrado!", 400);
+            throw new ControllerException("Usuario ja possui cadastro!", 400);
         }   
 
         $user->fill($request->dadosPessoais);
@@ -42,7 +42,7 @@ class UserController extends Controller
                 $userContact->fill($request->dadosContato)
             );
         }
-
+        
         return response()->json([
             "status" => true,
             "message" => "Usuario cadastrado com sucesso!",

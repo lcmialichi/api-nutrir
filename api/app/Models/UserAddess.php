@@ -11,6 +11,14 @@ class UserAddess extends Model
 
     protected $table = "usuario_endereco";
 
+    protected $fillable = [
+        "rua", "cidade", "estado", "bairro", "complemento"
+    ];
+
+    protected $attributes = [
+        "complemento" => ""
+    ];
+
     public function use(){
         return $this->belongsTo(User::class);
     }
