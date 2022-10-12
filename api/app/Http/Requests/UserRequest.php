@@ -38,6 +38,7 @@ class UserRequest extends FormRequest
             "dadosContato" => "array",
             "dadosContato.ddd" => "required_unless:dadosContato,null|numeric|digits:2",
             "dadosContato.telefone" => "required_unless:dadosContato,null|numeric|digits:9",
+            "dadosContato.email" => "required_unless:dadosContato,null|email",
             "dadosEndereco" => "array",
             "dadosEndereco.rua" => "required_unless:dadosEndereco,null|string|max:140",
             "dadosEndereco.bairro" => "required_unless:dadosEndereco,null|string|max:70:",

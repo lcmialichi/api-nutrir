@@ -15,4 +15,8 @@ class UserAccess extends Model
     {   
         return self::join("usuario", "usuario.id", "=", "usuario_id")->first();
     }
+
+    public function user(){
+        return $this->belongsTo(User::class, "usuario_id");
+    }
 }

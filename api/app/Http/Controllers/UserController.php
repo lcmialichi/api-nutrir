@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function __construct(){
 
-        $this->middleware(\App\Http\MiddleWare\Authorization::class);
+        // $this->middleware(\App\Http\MiddleWare\Authorization::class);
     }
     
     public function register (UserRequest $request) { 
@@ -18,5 +18,7 @@ class UserController extends Controller
             "status" => true,
             "message" => "passou em todas as validaçoes"
         ]);
+
+
     }
 }

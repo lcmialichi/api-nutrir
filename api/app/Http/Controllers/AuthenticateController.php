@@ -16,13 +16,16 @@ class AuthenticateController extends Controller
     public function auth(Request $request)
     {
         $this->validate($request,  [
-            "senha" => "required",
-            "usuario" => "required|acesso"
+            "senha" => "required|string",
+            "usuario" => "required|string"
         ]);
 
         $inputs = $request->all();
-        $user = UserAccess::getUserByAccess( $inputs["usuario"] );
-   
+        
+        $user = UserAccess::with(["user"])->where("acesso", $inputs["usuario"])->first();
+        if(!$user){
+            throw new ControllerException("Usuario ou senha Invalidos!", 401);
+        }
 
         if($user->senha != $inputs["senha"]){
             throw new ControllerException("Usuario ou senha Invalidos!", 401);
@@ -30,7 +33,7 @@ class AuthenticateController extends Controller
         }
 
         $jwt = JWT::encode([
-            "id" => $user->id, 
+            "id" => $user->user->id, 
             "date" =>time(), 
             "expire" => time() + 3600 
             ],getenv("JWTKEY"), 'HS256'
