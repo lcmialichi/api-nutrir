@@ -43,7 +43,12 @@ class UserRequest extends FormRequest
             "dadosEndereco.rua" => "required_unless:dadosEndereco,null|string|max:140",
             "dadosEndereco.bairro" => "required_unless:dadosEndereco,null|string|max:70:",
             "dadosEndereco.estado" => "required_unless:dadosEndereco,null|string|max:2",
-            "dadosEndereco.cidade" => "required_unless:dadosEndereco,null|string|max:50"
+            "dadosEndereco.cidade" => "required_unless:dadosEndereco,null|string|max:50",
+            "dadosAcesso" => "array",
+            "dadosAcesso.usuario" => "required_unless:dadosAcesso,null|string|max:20",
+            "dadosAcesso.senha" => "required_unless:dadosAcesso,null|string|max:30",
+            "dadosNutricionista" => "array",
+            "dadosNutricionista.crn" => "required_unless:dadosNutricionista,null|numeric|digits_between:1,30"
         ];
     }
 

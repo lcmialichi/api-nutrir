@@ -24,7 +24,7 @@ class User extends Model
     }
 
     public function userAddress(){
-        return $this->hasOne(UserAddess::class, "usuario_id");
+        return $this->hasOne(UserAddress::class, "usuario_id");
     }
 
     
