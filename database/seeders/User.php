@@ -23,6 +23,7 @@ class User extends Seeder
         $user->nascimento = (new \DateTime())->format("Y-m-d H:i:s");
         $userAccess->acesso = "lucas.mialichi";
         $userAccess->senha = "Mudar123";
+        $userAccess->nutricionista = 1;
         $userAccess->usuario_id = $user->save();
         $userAccess->save();
   

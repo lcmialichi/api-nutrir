@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Firebase\JWT\JWT;
+use App\Models\UserAccess;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 use App\Exceptions\ControllerException;
-use App\Models\UserAccess;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticateController extends Controller
 {
@@ -15,12 +16,14 @@ class AuthenticateController extends Controller
 
     public function auth(Request $request)
     {
-        $this->validate($request,  [
+        $validation = Validator::make($inputs = $request->all(),  [
             "senha" => "required|string",
             "usuario" => "required|string"
         ]);
 
-        $inputs = $request->all();
+        if($validation->fails()){
+            throw new ControllerException( $validation->errors()->first(), 422);
+        }
         
         $user = UserAccess::with(["user"])->where("acesso", $inputs["usuario"])->first();
         if(!$user){
@@ -36,7 +39,7 @@ class AuthenticateController extends Controller
             "id" => $user->user->id, 
             "date" =>time(), 
             "expire" => time() + 3600 
-            ],getenv("JWTKEY"), 'HS256'
+            ],getenv("JWT_SECRET"), 'HS256'
         );
 
         return response()->json([
