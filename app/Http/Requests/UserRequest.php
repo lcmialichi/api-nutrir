@@ -48,7 +48,7 @@ class UserRequest extends FormRequest
             "dadosAcesso.usuario" => "required_unless:dadosAcesso,null|string|max:20",
             "dadosAcesso.senha" => "required_unless:dadosAcesso,null|string|max:30",
             "dadosNutricionista" => "array",
-            "dadosNutricionista.crn" => "required_unless:dadosNutricionista,null|numeric|digits_between:1,30"
+            "dadosNutricionista.crn" => "required_unless:dadosNutricionista,null"
         ];
     }
 

@@ -10,7 +10,7 @@ class CRNService {
     public function __construct( private CFN $crn){
     }
 
-    public function validate(int $crn): void {
+    public function validate(int|string $crn): void {
 
         $this->crn->find($crn);
         if(!$this->crn->isValid()){
