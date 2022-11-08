@@ -14,7 +14,7 @@ class CRNService {
 
         $this->crn->find($crn);
         if(!$this->crn->isValid()){
-            throw new ServiceException("Nao achou o CRN do fdp!", 422);
+            throw new ServiceException("Nao achou o CRN!", 422);
         }
     }   
 
